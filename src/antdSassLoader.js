@@ -1,14 +1,11 @@
-import path from 'path';
+import path from "path";
 
-import { getOptions, urlToRequest } from 'loader-utils';
-import sassLoader from 'sass-loader';
-import importsToResolve from 'sass-loader/dist/importsToResolve';
+import { getOptions, urlToRequest } from "loader-utils";
+import sassLoader from "sass-loader";
+import importsToResolve from "sass-loader/dist/importsToResolve";
 
-import { getScssThemePath } from './loaderUtils';
-import {
-  compileThemeVariables,
-} from './utils';
-
+import { getScssThemePath } from "./loaderUtils";
+import { compileThemeVariables } from "./utils";
 
 /**
  * Utility returning a node-sass importer that provides access to all of antd's theme variables.
@@ -17,7 +14,11 @@ import {
  * @returns {function} Importer that provides access to all compiled Ant Design theme variables
  *   when importing the theme file at themeScssPath.
  */
-export const themeImporter = (themeScssPath, contents) => (url, previousResolve, done) => {
+export const themeImporter = (themeScssPath, contents) => (
+  url,
+  previousResolve,
+  done
+) => {
   const request = urlToRequest(url);
   const pathsToTry = importsToResolve(request);
 
@@ -32,7 +33,6 @@ export const themeImporter = (themeScssPath, contents) => (url, previousResolve,
   done();
 };
 
-
 /**
  * Modify sass-loader's options so that all antd variables are imported from the SCSS theme file.
  * @param {Object} options - Options for sass-loader.
@@ -46,7 +46,7 @@ export const overloadSassLoaderOptions = async (options) => {
   const extraImporter = themeImporter(scssThemePath, contents);
 
   let importer;
-  if ('importer' in options) {
+  if ("importer" in options) {
     if (Array.isArray(options.importer)) {
       importer = [...options.importer, extraImporter];
     } else {
@@ -60,7 +60,6 @@ export const overloadSassLoaderOptions = async (options) => {
 
   return newOptions;
 };
-
 
 /**
  * A wrapper around sass-loader which overloads loader options to include a custom importer handling

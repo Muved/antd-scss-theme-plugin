@@ -1,9 +1,8 @@
-import lessLoader from 'less-loader';
-import { getOptions } from 'loader-utils';
+import lessLoader from "less-loader";
+import { getOptions } from "loader-utils";
 
-import { loadScssThemeAsLess } from './utils';
-import { getScssThemePath } from './loaderUtils';
-
+import { loadScssThemeAsLess } from "./utils";
+import { getScssThemePath } from "./loaderUtils";
 
 /**
  * Modify less-loader's options with variable overrides extracted from the SCSS theme.
@@ -24,7 +23,6 @@ export const overloadLessLoaderOptions = (options) => {
 
   return newOptions;
 };
-
 
 /**
  * A wrapper around less-loader which overloads loader options and registers the theme file
