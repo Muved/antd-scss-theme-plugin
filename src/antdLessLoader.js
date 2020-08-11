@@ -15,9 +15,12 @@ export const overloadLessLoaderOptions = (options) => {
   const themeModifyVars = loadScssThemeAsLess(scssThemePath);
   const newOptions = {
     ...options,
-    modifyVars: {
-      ...themeModifyVars,
-      ...(options.modifyVars || {}),
+    lessOptions: {
+      modifyVars: {
+        ...themeModifyVars,
+        ...(options.modifyVars || {}),
+      },
+      javascriptEnabled: true,
     },
   };
 
