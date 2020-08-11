@@ -2,7 +2,7 @@ import path from "path";
 
 import { getOptions, urlToRequest } from "loader-utils";
 import sassLoader from "sass-loader";
-import importsToResolve from "sass-loader/dist/importsToResolve";
+import importsToResolve from "sass-loader/lib/importsToResolve";
 
 import { getScssThemePath } from "./loaderUtils";
 import { compileThemeVariables } from "./utils";
@@ -56,7 +56,8 @@ export const overloadSassLoaderOptions = async (options) => {
     importer = extraImporter;
   }
 
-  newOptions.importer = importer;
+  newOptions.sassOptions = { ...newOptions.options };
+  newOptions.sassOptions.importer = importer;
 
   return newOptions;
 };
